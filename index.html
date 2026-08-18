@@ -55,6 +55,12 @@
     html.js a.btn { transition:transform .2s ease, box-shadow .2s ease; animation:glowPulse 3.2s 2s ease-in-out infinite; }
     html.js a.btn:hover { transform:translateY(-2px); box-shadow:0 10px 24px rgba(0,165,233,0.5); }
 
+    /* Interactive checklist */
+    .checkitem .cbox { color:#00A5E9; font-size:18px; font-weight:800; }
+    html.js .checkitem { cursor:pointer; -webkit-tap-highlight-color:transparent; }
+    html.js .checkitem .clabel { transition:color .15s ease; }
+    html.js .checkitem.done .clabel { text-decoration:line-through; color:#9FB0C2; }
+
     @media (prefers-reduced-motion: reduce) {
       html.js .container > tbody > tr > td,
       html.js .hero-stack > *,
@@ -674,13 +680,14 @@
                 </td></tr>
                 <tr><td style="background-color:#ffffff; padding:20px;">
                   <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                    <tr><td style="padding:7px 0;" class="body" style="font-size:15px; color:#26374F;"><span style="color:#00A5E9; font-size:18px; font-weight:800;">&#9744;</span> &nbsp;<span class="body" style="font-size:15px; color:#26374F;">Confirm first day and arrival time</span></td></tr>
-                    <tr><td style="padding:7px 0;"><span style="color:#00A5E9; font-size:18px; font-weight:800;">&#9744;</span> &nbsp;<span class="body" style="font-size:15px; color:#26374F;">Review dress code</span></td></tr>
-                    <tr><td style="padding:7px 0;"><span style="color:#00A5E9; font-size:18px; font-weight:800;">&#9744;</span> &nbsp;<span class="body" style="font-size:15px; color:#26374F;">Prepare PE clothes</span></td></tr>
-                    <tr><td style="padding:7px 0;"><span style="color:#00A5E9; font-size:18px; font-weight:800;">&#9744;</span> &nbsp;<span class="body" style="font-size:15px; color:#26374F;">Make a Wednesday transportation plan</span></td></tr>
-                    <tr><td style="padding:7px 0;"><span style="color:#00A5E9; font-size:18px; font-weight:800;">&#9744;</span> &nbsp;<span class="body" style="font-size:15px; color:#26374F;">Review cell phone expectations</span></td></tr>
-                    <tr><td style="padding:7px 0;"><span style="color:#00A5E9; font-size:18px; font-weight:800;">&#9744;</span> &nbsp;<span class="body" style="font-size:15px; color:#26374F;">Save GLC and Dean contact information</span></td></tr>
-                    <tr><td style="padding:7px 0;"><span style="color:#00A5E9; font-size:18px; font-weight:800;">&#9744;</span> &nbsp;<span class="body" style="font-size:15px; color:#26374F;">Talk with your student about what they are excited about</span></td></tr>
+                    <tr><td class="checkitem" style="padding:8px 0;"><span class="cbox">&#9744;</span> &nbsp;<span class="clabel body" style="font-size:15px; color:#26374F;">Confirm first day and arrival time</span></td></tr>
+                    <tr><td class="checkitem" style="padding:8px 0;"><span class="cbox">&#9744;</span> &nbsp;<span class="clabel body" style="font-size:15px; color:#26374F;">Review dress code</span></td></tr>
+                    <tr><td class="checkitem" style="padding:8px 0;"><span class="cbox">&#9744;</span> &nbsp;<span class="clabel body" style="font-size:15px; color:#26374F;">Prepare PE clothes</span></td></tr>
+                    <tr><td class="checkitem" style="padding:8px 0;"><span class="cbox">&#9744;</span> &nbsp;<span class="clabel body" style="font-size:15px; color:#26374F;">Make a Wednesday transportation plan</span></td></tr>
+                    <tr><td class="checkitem" style="padding:8px 0;"><span class="cbox">&#9744;</span> &nbsp;<span class="clabel body" style="font-size:15px; color:#26374F;">Review cell phone expectations</span></td></tr>
+                    <tr><td class="checkitem" style="padding:8px 0;"><span class="cbox">&#9744;</span> &nbsp;<span class="clabel body" style="font-size:15px; color:#26374F;">Complete the Chromebook expectations form</span></td></tr>
+                    <tr><td class="checkitem" style="padding:8px 0;"><span class="cbox">&#9744;</span> &nbsp;<span class="clabel body" style="font-size:15px; color:#26374F;">Save GLC and Dean contact information</span></td></tr>
+                    <tr><td class="checkitem" style="padding:8px 0;"><span class="cbox">&#9744;</span> &nbsp;<span class="clabel body" style="font-size:15px; color:#26374F;">Talk with your student about what they are excited about</span></td></tr>
                   </table>
                 </td></tr>
               </table>
@@ -734,6 +741,18 @@
         });
       }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
       cells.forEach(function (c) { io.observe(c); });
+    })();
+  </script>
+  <script>
+    (function () {
+      var BOX = '\u2610', CHECKED = '\u2611';
+      document.querySelectorAll('.checkitem').forEach(function (item) {
+        item.addEventListener('click', function () {
+          var done = item.classList.toggle('done');
+          var box = item.querySelector('.cbox');
+          if (box) box.textContent = done ? CHECKED : BOX;
+        });
+      });
     })();
   </script>
 </body>
